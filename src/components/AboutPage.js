@@ -33,11 +33,112 @@ import char13 from "../assets/images/13.jpg";
 import char14 from "../assets/images/14.jpg";
 import char15 from "../assets/images/15.jpg";
 
+// Pronunciation GIF - add more as you get them
+import baGif from "../assets/images/BA.gif";
+
 const baybayinChars = [
   char1, char2, char3, char4, char5,
   char6, char7, char8, char9, char10,
   char11, char12, char13, char14, char15
 ];
+
+// FlipCard Component with Modal
+const FlipCard = ({ frontImage, backImage, index, onOpenModal }) => {
+  const [isFlipped, setIsFlipped] = React.useState(false);
+
+  return (
+    <div
+      className="flip-card-container"
+      style={{
+        width: '55px',
+        height: '55px',
+        perspective: '1000px',
+        cursor: 'pointer'
+      }}
+    >
+      <div
+        className="flip-card-inner"
+        style={{
+          position: 'relative',
+          width: '100%',
+          height: '100%',
+          transition: 'transform 0.6s',
+          transformStyle: 'preserve-3d',
+          transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)'
+        }}
+      >
+        {/* Front - Baybayin Character */}
+        <div
+          className="flip-card-front"
+          onClick={() => onOpenModal(frontImage, backImage, index)}
+          style={{
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            backfaceVisibility: 'hidden',
+            background: 'rgba(255, 255, 255, 0.95)',
+            borderRadius: '5px',
+            padding: '4px',
+            boxShadow: '0 2px 8px rgba(219, 192, 132, 0.3)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transition: 'all 0.3s ease'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'translateY(-3px) scale(1.05)';
+            e.currentTarget.style.boxShadow = '0 6px 16px rgba(219, 192, 132, 0.5)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'translateY(0) scale(1)';
+            e.currentTarget.style.boxShadow = '0 2px 8px rgba(219, 192, 132, 0.3)';
+          }}
+        >
+          <img
+            src={frontImage}
+            alt={`Baybayin Character ${index + 1}`}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'contain'
+            }}
+          />
+        </div>
+
+        {/* Back - Pronunciation GIF */}
+        <div
+          className="flip-card-back"
+          onClick={() => setIsFlipped(false)}
+          style={{
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            backfaceVisibility: 'hidden',
+            background: 'linear-gradient(135deg, rgba(219, 192, 132, 0.2), rgba(244, 215, 153, 0.15))',
+            borderRadius: '5px',
+            padding: '4px',
+            boxShadow: '0 2px 8px rgba(219, 192, 132, 0.4)',
+            transform: 'rotateY(180deg)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            border: '2px solid rgba(219, 192, 132, 0.5)'
+          }}
+        >
+          <img
+            src={backImage}
+            alt={`Pronunciation ${index + 1}`}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'contain'
+            }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
 
 class AboutPage extends Page {
   constructor(props) {
@@ -59,9 +160,13 @@ class AboutPage extends Page {
     this.swiperInstance = null;
   }
 
-  openCharacterModal = (character, index) => {
+  openCharacterModal = (frontImage, backImage, index) => {
     this.setState({
-      selectedCharacter: { src: character, index: index + 1 },
+      selectedCharacter: { 
+        frontImage: frontImage,
+        backImage: backImage,
+        index: index + 1 
+      },
       showModal: true
     });
   }
@@ -228,24 +333,23 @@ class AboutPage extends Page {
               </div>
             </SwiperSlide>
 
-            {/* Slide 5 - Baybayin Alphabet */}
+            {/* Slide 5 - Baybayin Alphabet with Flip Cards */}
             <SwiperSlide>
               <div className="content small-text">
                 <h3>BAYBAYIN ALPHABET</h3>
                 <div className="alphabet-grid">
                   {baybayinChars.map((char, i) => (
-                    <img
+                    <FlipCard
                       key={i}
-                      src={char}
-                      alt={`Baybayin Character ${i + 1}`}
-                      className="alphabet-image"
-                      onClick={() => this.openCharacterModal(char, i)}
-                      style={{ cursor: 'pointer' }}
+                      frontImage={char}
+                      backImage={i === 0 ? baGif : char}
+                      index={i}
+                      onOpenModal={this.openCharacterModal}
                     />
                   ))}
                 </div>
                 <p style={{ marginTop: "10px", textAlign: "center", fontStyle: "italic", fontSize: "0.8em", color: "rgba(219, 192, 132, 0.7)" }}>
-                  Click on any character to view it larger
+                  Click any character to view larger and flip to see how to write it.
                 </p>
               </div>
             </SwiperSlide>
@@ -291,78 +395,12 @@ class AboutPage extends Page {
           </Swiper>
         </div>
 
-        {/* Character Modal */}
+        {/* Enhanced Character Modal with Flip Functionality */}
         {this.state.showModal && this.state.selectedCharacter && (
-          <div 
-            className="character-modal-overlay" 
-            onClick={this.closeCharacterModal}
-            style={{
-              position: 'fixed',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              background: 'rgba(0, 0, 0, 0.8)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              zIndex: 1000,
-              cursor: 'pointer'
-            }}
-          >
-            <div 
-              className="character-modal-content"
-              onClick={(e) => e.stopPropagation()}
-              style={{
-                background: 'rgba(255, 255, 255, 0.95)',
-                borderRadius: '10px',
-                padding: '20px',
-                maxWidth: '400px',
-                maxHeight: '400px',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                cursor: 'default'
-              }}
-            >
-              <img
-                src={this.state.selectedCharacter.src}
-                alt={`Baybayin Character ${this.state.selectedCharacter.index}`}
-                style={{
-                  width: '250px',
-                  height: '250px',
-                  objectFit: 'contain',
-                  marginBottom: '10px'
-                }}
-              />
-              <p style={{
-                color: '#2c2c2c',
-                fontFamily: 'Poppins, sans-serif',
-                fontSize: '14px',
-                textAlign: 'center',
-                margin: '0'
-              }}>
-                Baybayin Character #{this.state.selectedCharacter.index}
-              </p>
-              <button
-                onClick={this.closeCharacterModal}
-                style={{
-                  marginTop: '15px',
-                  background: '#dbc084',
-                  border: 'none',
-                  color: '#2c2c2c',
-                  padding: '8px 16px',
-                  borderRadius: '5px',
-                  cursor: 'pointer',
-                  fontFamily: 'Poppins, sans-serif',
-                  fontSize: '12px',
-                  fontWeight: '500'
-                }}
-              >
-                Close
-              </button>
-            </div>
-          </div>
+          <ModalWithFlip
+            character={this.state.selectedCharacter}
+            onClose={this.closeCharacterModal}
+          />
         )}
       </Element>
     );
@@ -373,5 +411,194 @@ class AboutPage extends Page {
     if (element) element.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 }
+
+// Modal Component with Flip Card
+const ModalWithFlip = ({ character, onClose }) => {
+  const [isFlipped, setIsFlipped] = React.useState(false);
+
+  return (
+    <div 
+      className="character-modal-overlay" 
+      onClick={onClose}
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        background: 'rgba(0, 0, 0, 0.85)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 1000,
+        cursor: 'pointer',
+        backdropFilter: 'blur(3px)'
+      }}
+    >
+      <div 
+        className="character-modal-content"
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          background: 'transparent',
+          borderRadius: '15px',
+          padding: '30px',
+          maxWidth: '450px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          cursor: 'default'
+        }}
+      >
+        {/* Large Flip Card */}
+        <div
+          style={{
+            width: '300px',
+            height: '300px',
+            perspective: '1000px',
+            marginBottom: '20px'
+          }}
+        >
+          <div
+            style={{
+              position: 'relative',
+              width: '100%',
+              height: '100%',
+              transition: 'transform 0.6s',
+              transformStyle: 'preserve-3d',
+              transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)'
+            }}
+          >
+            {/* Front */}
+            <div
+              style={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                backfaceVisibility: 'hidden',
+                background: 'rgba(255, 255, 255, 0.98)',
+                borderRadius: '15px',
+                padding: '20px',
+                boxShadow: '0 10px 40px rgba(219, 192, 132, 0.4)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                border: '3px solid rgba(219, 192, 132, 0.3)'
+              }}
+            >
+              <img
+                src={character.frontImage}
+                alt={`Baybayin Character ${character.index}`}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain'
+                }}
+              />
+            </div>
+
+            {/* Back */}
+            <div
+              style={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                backfaceVisibility: 'hidden',
+                background: 'linear-gradient(135deg, rgba(219, 192, 132, 0.25), rgba(244, 215, 153, 0.2))',
+                borderRadius: '15px',
+                padding: '20px',
+                boxShadow: '0 10px 40px rgba(219, 192, 132, 0.5)',
+                transform: 'rotateY(180deg)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                border: '3px solid rgba(219, 192, 132, 0.6)',
+                backdropFilter: 'blur(10px)'
+              }}
+            >
+              <img
+                src={character.backImage}
+                alt={`Pronunciation ${character.index}`}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain'
+                }}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Info and Buttons */}
+        <p style={{
+          color: '#dbc084',
+          fontFamily: 'Poppins, sans-serif',
+          fontSize: '16px',
+          textAlign: 'center',
+          margin: '0 0 15px 0',
+          fontWeight: '500',
+          textShadow: '0 2px 4px rgba(0, 0, 0, 0.8)'
+        }}>
+          Baybayin Character #{character.index}
+        </p>
+
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <button
+            onClick={() => setIsFlipped(!isFlipped)}
+            style={{
+              background: 'linear-gradient(135deg, #dbc084, #f4d799)',
+              border: 'none',
+              color: '#2c2c2c',
+              padding: '10px 20px',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              fontFamily: 'Poppins, sans-serif',
+              fontSize: '14px',
+              fontWeight: '600',
+              boxShadow: '0 4px 12px rgba(219, 192, 132, 0.4)',
+              transition: 'all 0.3s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-2px)';
+              e.currentTarget.style.boxShadow = '0 6px 16px rgba(219, 192, 132, 0.6)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = '0 4px 12px rgba(219, 192, 132, 0.4)';
+            }}
+          >
+            {isFlipped ? 'Show Character' : 'Show how to write'}
+          </button>
+
+          <button
+            onClick={onClose}
+            style={{
+              background: 'rgba(255, 255, 255, 0.1)',
+              border: '2px solid rgba(219, 192, 132, 0.5)',
+              color: '#dbc084',
+              padding: '10px 20px',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              fontFamily: 'Poppins, sans-serif',
+              fontSize: '14px',
+              fontWeight: '600',
+              backdropFilter: 'blur(5px)',
+              transition: 'all 0.3s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(219, 192, 132, 0.2)';
+              e.currentTarget.style.borderColor = '#dbc084';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+              e.currentTarget.style.borderColor = 'rgba(219, 192, 132, 0.5)';
+            }}
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default AboutPage;
