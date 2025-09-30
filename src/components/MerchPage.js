@@ -1,5 +1,11 @@
-
-import { ChevronLeft, ChevronRight,ShoppingCart } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  ShoppingCart,
+  Heart,
+  X,
+  Check,
+} from "lucide-react";
 import React, { useState, useRef } from "react";
 import { Element } from "react-scroll";
 import "./MerchPage.css";
@@ -29,9 +35,14 @@ const MerchPage = ({ title, content }) => {
   const [hoverDetails, setHoverDetails] = useState(null);
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [cartToast, setCartToast] = useState("");
+  const [checkoutMessage, setCheckoutMessage] = useState("");
+  const [selectionModal, setSelectionModal] = useState({ open: false, item: null });
+  const [selectedSize, setSelectedSize] = useState("");
+  const [selectedColor, setSelectedColor] = useState("");
   const scrollRef = useRef(null);
 
-  // Toggle favorite
+  // --- Helpers ---
   const toggleFavorite = (merchID) => {
     setFavorites((prev) => {
       const newFavs = new Set(prev);
@@ -40,12 +51,22 @@ const MerchPage = ({ title, content }) => {
     });
   };
 
-  // Toggle expanded details
   const toggleDetails = (merchID) => {
     setExpandedItem((prev) => (prev === merchID ? null : merchID));
   };
 
-  // Add to cart
+  const openSelection = (item) => {
+    setSelectionModal({ open: true, item });
+    setSelectedSize("");
+    setSelectedColor("");
+  };
+
+  const confirmSelection = () => {
+    if (!selectedSize || !selectedColor) return;
+    addToCart({ ...selectionModal.item, selectedSize, selectedColor });
+    setSelectionModal({ open: false, item: null });
+  };
+
   const addToCart = (item) => {
     setCart((prev) => {
       const existingItem = prev.find((cartItem) => cartItem.merchID === item.merchID);
@@ -58,45 +79,47 @@ const MerchPage = ({ title, content }) => {
       }
       return [...prev, { ...item, quantity: 1 }];
     });
+
+    setCartToast(`✅ ${item.name} added to cart`);
+    setTimeout(() => setCartToast(""), 2500);
   };
 
-  // Remove from cart
   const removeFromCart = (merchID) => {
     setCart((prev) => prev.filter((item) => item.merchID !== merchID));
   };
 
-  // Update quantity
   const updateQuantity = (merchID, newQuantity) => {
-    if (newQuantity <= 0) {
-      removeFromCart(merchID);
-    } else {
-      setCart((prev) =>
-        prev.map((item) =>
-          item.merchID === merchID ? { ...item, quantity: newQuantity } : item
-        )
-      );
-    }
+    if (newQuantity <= 0) return removeFromCart(merchID);
+    setCart((prev) =>
+      prev.map((item) =>
+        item.merchID === merchID ? { ...item, quantity: newQuantity } : item
+      )
+    );
   };
 
-  // Get total price
-  const getTotalPrice = () => {
-    return cart.reduce((total, item) => {
+  const getTotalPrice = () =>
+    cart.reduce((total, item) => {
       const price = parseFloat(item.price.replace(/[₱$,]/g, ""));
       return total + price * item.quantity;
     }, 0);
+
+  const getCartItemCount = () =>
+    cart.reduce((count, item) => count + item.quantity, 0);
+
+  const handleCheckout = () => {
+    if (cart.length === 0) {
+      setCheckoutMessage("⚠️ Your cart is empty!");
+    } else {
+      setCheckoutMessage("🎉 Thank you for your purchase!");
+      setCart([]);
+    }
+    setTimeout(() => setCheckoutMessage(""), 3000);
   };
 
-  // Get cart item count
-  const getCartItemCount = () => {
-    return cart.reduce((count, item) => count + item.quantity, 0);
-  };
-
-  // External store link
   const redirectToBrand = (brandURL) => {
     if (brandURL) window.open(brandURL, "_blank");
   };
 
-  // Scroll controls
   const scrollLeft = () => {
     scrollRef.current?.scrollBy({ left: -300, behavior: "smooth" });
   };
@@ -104,9 +127,11 @@ const MerchPage = ({ title, content }) => {
     scrollRef.current?.scrollBy({ left: 300, behavior: "smooth" });
   };
 
+  // --- JSX ---
   return (
     <Element name="merch">
       <div className="merch-page">
+        {/* Header */}
         <div className="merch-header">
           <h1>{title || "MERCHANDISE"}</h1>
           <p>
@@ -115,14 +140,16 @@ const MerchPage = ({ title, content }) => {
           </p>
         </div>
 
+        {/* Cart Toggle */}
         <button
-  className="cart-toggle-btn"
-  onClick={() => setIsCartOpen(!isCartOpen)}
->
-  <ShoppingCart size={12} className="cart-icon" />
-  <span className="cart-label">{`Cart (${getCartItemCount()})`}</span>
-</button>
-        {/* Scroll Buttons with spacing */}
+          className={`cart-toggle-btn ${cartToast ? "cart-bump" : ""}`}
+          onClick={() => setIsCartOpen(!isCartOpen)}
+        >
+          <ShoppingCart size={18} className="cart-icon" />
+          <span className="cart-label">{`Cart (${getCartItemCount()})`}</span>
+        </button>
+
+        {/* Scroll Buttons */}
         <button className="scroll-btn left" onClick={scrollLeft}>
           <ChevronLeft size={24} />
         </button>
@@ -137,11 +164,8 @@ const MerchPage = ({ title, content }) => {
             const isHovered = hoverDetails === item.merchID;
 
             return (
-              <div
-                key={item.merchID}
-                className={`merch-card ${isExpanded ? "expanded" : ""}`}
-              >
-                {/* Image + overlay */}
+              <div key={item.merchID} className={`merch-card ${isExpanded ? "expanded" : ""}`}>
+                {/* Image + Hover */}
                 <div
                   className="merch-image-container"
                   onMouseEnter={() => setHoverDetails(item.merchID)}
@@ -153,7 +177,6 @@ const MerchPage = ({ title, content }) => {
                     className="merch-image"
                   />
 
-                  {/* Hover overlay */}
                   {isHovered && (
                     <div className="hover-details-overlay">
                       <div className="hover-details-content">
@@ -172,20 +195,16 @@ const MerchPage = ({ title, content }) => {
                     </div>
                   )}
 
-                  {/* Favorite button */}
+                  {/* Favorite Button */}
                   <button
-                    className={`favorite-btn ${
-                      favorites.has(item.merchID) ? "favorited" : ""
-                    }`}
+                    className={`favorite-btn ${favorites.has(item.merchID) ? "favorited" : ""}`}
                     onClick={() => toggleFavorite(item.merchID)}
                     aria-label="Add to favorites"
                   >
-                    <svg viewBox="0 0 24 24" fill="currentColor" className="heart-icon">
-                      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                    </svg>
+                    <Heart size={20} />
                   </button>
 
-                  {/* Price badge */}
+                  {/* Price Badge */}
                   <div className="quick-info-badge">
                     <span className="price-badge">{item.price}</span>
                   </div>
@@ -195,30 +214,23 @@ const MerchPage = ({ title, content }) => {
                 <div className="merch-content">
                   <h3 className="merch-name">{item.name}</h3>
 
-                  {/* Expanded details */}
                   {isExpanded && (
                     <div className="merch-details">
                       <p className="merch-description">{item.description}</p>
-
                       <div className="product-specs">
                         <div className="spec-row">
                           <strong>Available Sizes:</strong>
                           <div className="spec-tags">
                             {item.sizes.map((size, i) => (
-                              <span key={i} className="spec-tag size-tag">
-                                {size}
-                              </span>
+                              <span key={i} className="spec-tag size-tag">{size}</span>
                             ))}
                           </div>
                         </div>
-
                         <div className="spec-row">
                           <strong>Available Colors:</strong>
                           <div className="spec-tags">
                             {item.colors.map((color, i) => (
-                              <span key={i} className="spec-tag color-tag">
-                                {color}
-                              </span>
+                              <span key={i} className="spec-tag color-tag">{color}</span>
                             ))}
                           </div>
                         </div>
@@ -229,19 +241,13 @@ const MerchPage = ({ title, content }) => {
                   <div className="merch-price-main">{item.price}</div>
 
                   <div className="merch-actions">
-                    <button className="add-to-cart-btn" onClick={() => addToCart(item)}>
+                    <button className="add-to-cart-btn" onClick={() => openSelection(item)}>
                       Add to Cart
                     </button>
-                    <button
-                      className="brand-link-btn"
-                      onClick={() => redirectToBrand(item.brandURL)}
-                    >
+                    <button className="brand-link-btn" onClick={() => redirectToBrand(item.brandURL)}>
                       Visit Store
                     </button>
-                    <button
-                      className="details-btn"
-                      onClick={() => toggleDetails(item.merchID)}
-                    >
+                    <button className="details-btn" onClick={() => toggleDetails(item.merchID)}>
                       {isExpanded ? "Less Info" : "More Info"}
                     </button>
                   </div>
@@ -256,42 +262,31 @@ const MerchPage = ({ title, content }) => {
           <div className="cart-header">
             <h3>Your Cart</h3>
             <button className="close-cart-btn" onClick={() => setIsCartOpen(false)}>
-              ×
+              <X size={20} />
             </button>
           </div>
 
+          {checkoutMessage && <div className="checkout-message">{checkoutMessage}</div>}
+
           <div className="cart-content">
             {cart.length === 0 ? (
-              <div className="empty-cart">
-                <p>Your cart is empty</p>
-              </div>
+              <div className="empty-cart"><p>Your cart is empty</p></div>
             ) : (
               <>
                 <div className="cart-items">
                   {cart.map((item) => (
                     <div key={item.merchID} className="cart-item">
-                      <img
-                        src={imageMap[item.image]}
-                        alt={item.name}
-                        className="cart-item-image"
-                      />
+                      <img src={imageMap[item.image]} alt={item.name} className="cart-item-image" />
                       <div className="cart-item-details">
                         <h4>{item.name}</h4>
                         <p>{item.price}</p>
                         <div className="quantity-controls">
-                          <button onClick={() => updateQuantity(item.merchID, item.quantity - 1)}>
-                            -
-                          </button>
+                          <button onClick={() => updateQuantity(item.merchID, item.quantity - 1)}>-</button>
                           <span>{item.quantity}</span>
-                          <button onClick={() => updateQuantity(item.merchID, item.quantity + 1)}>
-                            +
-                          </button>
+                          <button onClick={() => updateQuantity(item.merchID, item.quantity + 1)}>+</button>
                         </div>
                       </div>
-                      <button
-                        className="remove-item-btn"
-                        onClick={() => removeFromCart(item.merchID)}
-                      >
+                      <button className="remove-item-btn" onClick={() => removeFromCart(item.merchID)}>
                         🗑️
                       </button>
                     </div>
@@ -302,7 +297,9 @@ const MerchPage = ({ title, content }) => {
                   <div className="cart-total">
                     <strong>Total: ₱{getTotalPrice().toFixed(2)}</strong>
                   </div>
-                  <button className="checkout-btn">Proceed to Checkout</button>
+                  <button className="checkout-btn" onClick={handleCheckout}>
+                    Checkout
+                  </button>
                 </div>
               </>
             )}
@@ -310,8 +307,62 @@ const MerchPage = ({ title, content }) => {
         </div>
 
         {/* Cart Overlay */}
-        {isCartOpen && (
-          <div className="cart-overlay" onClick={() => setIsCartOpen(false)}></div>
+        {isCartOpen && <div className="cart-overlay" onClick={() => setIsCartOpen(false)}></div>}
+
+        {/* Toast Notification */}
+        {cartToast && (
+          <div className="cart-toast">
+            <Check size={18} className="toast-icon" />
+            <span>{cartToast}</span>
+          </div>
+        )}
+
+        {/* Selection Modal */}
+        {selectionModal.open && (
+          <div className="selection-modal">
+            <div className="modal-content">
+              <h3>Select Options for {selectionModal.item.name}</h3>
+
+              <div className="option-group">
+                <strong>Size:</strong>
+                <div className="spec-tags">
+                  {selectionModal.item.sizes.map((size, i) => (
+                    <button
+                      key={i}
+                      className={`spec-tag size-tag ${selectedSize === size ? "active" : ""}`}
+                      onClick={() => setSelectedSize(size)}
+                    >
+                      {size}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="option-group">
+                <strong>Color:</strong>
+                <div className="spec-tags">
+                  {selectionModal.item.colors.map((color, i) => (
+                    <button
+                      key={i}
+                      className={`spec-tag color-tag ${selectedColor === color ? "active" : ""}`}
+                      onClick={() => setSelectedColor(color)}
+                    >
+                      {color}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="modal-actions">
+                <button onClick={confirmSelection} className="add-to-cart-btn confirm-btn">
+                  <Check size={18} /> Confirm
+                </button>
+                <button onClick={() => setSelectionModal({ open: false, item: null })} className="cancel-btn">
+                  <X size={18} /> Cancel
+                </button>
+              </div>
+            </div>
+          </div>
         )}
       </div>
     </Element>

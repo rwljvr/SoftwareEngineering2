@@ -33,13 +33,34 @@ import char13 from "../assets/images/13.jpg";
 import char14 from "../assets/images/14.jpg";
 import char15 from "../assets/images/15.jpg";
 
-// Pronunciation GIF - add more as you get them
+// Pronunciation GIFs
 import baGif from "../assets/images/BA.gif";
+import daGif from "../assets/images/DA.gif";
+import gaGif from "../assets/images/GA.gif";
+import haGif from "../assets/images/HA.gif";
+import kaGif from "../assets/images/KA.gif";
+import laGif from "../assets/images/LA.gif";
+import maGif from "../assets/images/MA.gif";
+import naGif from "../assets/images/NA.gif";
+import ngaGif from "../assets/images/NGA.gif";
+import paGif from "../assets/images/PA.gif";
+import raGif from "../assets/images/RA.gif";
+import saGif from "../assets/images/SA.gif";
+import taGif from "../assets/images/TA.gif";
+import waGif from "../assets/images/WA.gif";
+import yaGif from "../assets/images/YA.gif";
+// Pronunciation GIF - add more as you get them
+
 
 const baybayinChars = [
   char1, char2, char3, char4, char5,
   char6, char7, char8, char9, char10,
   char11, char12, char13, char14, char15
+];
+const pronunciationGifs = [
+  baGif, daGif, gaGif, haGif, kaGif,
+  laGif, maGif, naGif, ngaGif, paGif,
+  raGif, saGif, taGif, waGif, yaGif
 ];
 
 // FlipCard Component with Modal
@@ -85,14 +106,7 @@ const FlipCard = ({ frontImage, backImage, index, onOpenModal }) => {
             justifyContent: 'center',
             transition: 'all 0.3s ease'
           }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'translateY(-3px) scale(1.05)';
-            e.currentTarget.style.boxShadow = '0 6px 16px rgba(219, 192, 132, 0.5)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = 'translateY(0) scale(1)';
-            e.currentTarget.style.boxShadow = '0 2px 8px rgba(219, 192, 132, 0.3)';
-          }}
+          
         >
           <img
             src={frontImage}
@@ -339,16 +353,23 @@ class AboutPage extends Page {
                 <h3>BAYBAYIN ALPHABET</h3>
                 <div className="alphabet-grid">
                   {baybayinChars.map((char, i) => (
-                    <FlipCard
-                      key={i}
-                      frontImage={char}
-                      backImage={i === 0 ? baGif : char}
-                      index={i}
-                      onOpenModal={this.openCharacterModal}
-                    />
-                  ))}
+  <FlipCard
+    key={i}
+    frontImage={char}
+    backImage={pronunciationGifs[i]}
+    index={i}
+    onOpenModal={this.openCharacterModal}
+  />
+))}
                 </div>
-                <p style={{ marginTop: "10px", textAlign: "center", fontStyle: "italic", fontSize: "0.8em", color: "rgba(219, 192, 132, 0.7)" }}>
+                <p style={{
+  color: '#dbc084',
+  fontFamily: 'Poppins, sans-serif',
+  fontSize: '16px',
+  textAlign: 'center',
+  margin: '10px 0',
+  fontWeight: '600'
+}}>
                   Click any character to view larger and flip to see how to write it.
                 </p>
               </div>
@@ -541,7 +562,7 @@ const ModalWithFlip = ({ character, onClose }) => {
           Baybayin Character #{character.index}
         </p>
 
-        <div style={{ display: 'flex', gap: '10px' }}>
+        <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
           <button
             onClick={() => setIsFlipped(!isFlipped)}
             style={{
@@ -557,14 +578,7 @@ const ModalWithFlip = ({ character, onClose }) => {
               boxShadow: '0 4px 12px rgba(219, 192, 132, 0.4)',
               transition: 'all 0.3s ease'
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-2px)';
-              e.currentTarget.style.boxShadow = '0 6px 16px rgba(219, 192, 132, 0.6)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = '0 4px 12px rgba(219, 192, 132, 0.4)';
-            }}
+           
           >
             {isFlipped ? 'Show Character' : 'Show how to write'}
           </button>
