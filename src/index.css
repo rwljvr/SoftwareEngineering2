@@ -1,0 +1,13 @@
+/* Reset body background to dark */
+body {
+  margin: 0;
+  padding: 0;
+  background: #111; /* same as your homepage background */
+  font-family: Arial, sans-serif;
+}
+
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}

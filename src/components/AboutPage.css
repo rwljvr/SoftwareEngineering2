@@ -1,0 +1,300 @@
+/* AboutPage.css */
+
+/* SECTION WRAPPER */
+.about-section {
+  width: calc(100% - 220px);
+  margin-left: 220px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: url("../assets/images/Baybayin-bg.jpg") no-repeat center center / cover;
+  position: relative;
+  padding: 20px; /* reduced */
+  scroll-margin-top: 80px;
+  padding-top: 30px; /* reduced */
+}
+
+.about-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 1;
+}
+
+.about-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../assets/images/background2.png") no-repeat center center / cover;
+  opacity: 0.2;
+  z-index: 2;
+}
+
+/* HEADER */
+.about-header {
+  text-align: center;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 15;
+  width: 100%;
+  max-width: 600px; /* smaller */
+  padding-top: 10px;
+}
+
+.main-title {
+  font-size: 24px; /* half */
+  font-weight: 700;
+  color: #dbc084;
+  margin: 0 0 10px 0;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  font-family: 'Poppins', sans-serif;
+}
+
+.separator-bar {
+  width: 60px; /* half */
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #dbc084, transparent);
+  margin: 0 auto 10px auto;
+  border-radius: 1px;
+}
+
+.slogan {
+  font-size: 12px; /* half */
+  color: rgba(219, 192, 132, 0.9);
+  font-style: italic;
+  font-weight: 300;
+  margin: 0 auto;
+  max-width: 300px;
+  line-height: 1.3;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+/* CONTENT BOX */
+.about-container {
+  background: rgba(20, 20, 20, 0.85);
+  border-radius: 10px;
+  padding: 20px; /* half */
+  max-width: 600px; /* half */
+  width: 100%;
+  z-index: 10;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(219, 192, 132, 0.2);
+}
+
+/* NAVIGATION BUTTONS */
+.content-nav {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 15px;
+  justify-content: center;
+  position: relative;
+  z-index: 11;
+}
+
+.content-nav button {
+  background: rgba(219, 192, 132, 0.1);
+  border: 1px solid #dbc084;
+  color: #dbc084;
+  padding: 6px 12px; /* half */
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 10px; /* half */
+  font-weight: 500;
+  transition: all 0.3s ease;
+  min-width: 80px; /* half */
+  font-family: 'Poppins', sans-serif;
+}
+
+.content-nav button:hover {
+  background: rgba(219, 192, 132, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(219, 192, 132, 0.3);
+}
+
+.content-nav button.active {
+  background: linear-gradient(45deg, #dbc084, #f4d799);
+  color: #2c2c2c;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(219, 192, 132, 0.4);
+}
+
+/* SWIPER */
+.about-swiper {
+  width: 100%;
+  transition: height 0.3s ease-in-out;
+  height: auto;
+  position: relative;
+  z-index: 11;
+}
+
+.swiper-slide {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.content {
+  text-align: left;
+  max-width: 350px; /* half */
+  position: relative;
+  z-index: 12;
+}
+
+.about-section h3 {
+  font-size: 16px; /* half */
+  color: #dbc084;
+  margin-bottom: 8px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.about-section p {
+  font-size: 12px; /* half */
+  line-height: 1.4;
+  color: rgba(219, 192, 132, 0.9);
+  margin-bottom: 8px;
+}
+
+/* IMAGES */
+.about-image {
+  max-width: 50%; /* half */
+  border-radius: 6px;
+  border: 1px solid #dbc084;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  margin-top: 10px;
+}
+
+/* HERO SLIDES */
+.content.full-width {
+  max-width: 100%;
+  width: 100%;
+  padding: 0;
+  text-align: center;
+  background: none;
+  box-shadow: none;
+}
+
+.content.full-width img,
+.content.full-width .gallery {
+  width: 100%;
+  max-width: 100%;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .about-section {
+    margin-left: 0;
+    width: 100%;
+    scroll-margin-top: 0;
+    padding: 15px;
+  }
+  
+  .content-nav {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .content-nav button {
+    width: 120px;
+  }
+
+  .main-title {
+    font-size: 20px;
+  }
+
+  .slogan {
+    font-size: 11px;
+    padding: 0 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-title {
+    font-size: 18px;
+  }
+  
+  .slogan {
+    font-size: 10px;
+    max-width: 250px;
+    line-height: 1.3;
+  }
+
+  .about-section p {
+    font-size: 11px;
+  }
+
+  .about-image {
+    max-width: 60%; /* a bit bigger for readability on small screens */
+  }
+}
+
+/* BAYBAYIN ALPHABET GRID - Enhanced Version with Full-Size Images */
+.alphabet-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns for 3×5 layout */
+  grid-template-rows: repeat(5, 1fr);    /* 5 rows for 3×5 layout */
+  gap: 6px;
+  justify-items: center;
+  align-items: center;
+  margin: 15px auto;
+  padding: 12px;
+  max-width: 220px;
+  background: rgba(219, 192, 132, 0.05);
+  border-radius: 8px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.alphabet-image {
+  width: 55px;
+  height: 55px;
+  object-fit: contain; /* Changed back to contain to show full content */
+  border: none;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 5px;
+  padding: 4px; /* Added back some padding for margin around content */
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.alphabet-image:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 4px 12px rgba(219, 192, 132, 0.4);
+  background: rgba(219, 192, 132, 0.1);
+}
+
+/* Responsive adjustments for the grid */
+@media (max-width: 768px) {
+  .alphabet-grid {
+    max-width: 180px;
+    gap: 4px;
+    padding: 10px;
+  }
+  
+  .alphabet-image {
+    width: 45px;
+    height: 45px;
+    padding: 3px;
+  }
+}
+
+@media (max-width: 480px) {
+  .alphabet-grid {
+    max-width: 160px;
+    gap: 3px;
+    padding: 8px;
+  }
+  
+  .alphabet-image {
+    width: 40px;
+    height: 40px;
+    padding: 2px;
+  }
+}

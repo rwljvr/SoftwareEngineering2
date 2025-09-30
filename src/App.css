@@ -1,0 +1,13 @@
+/* App layout only – no page-specific styles here */
+.app {
+  display: flex;
+  min-height: 100vh;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+/* (Remove any .sidebar, .homepage, .content, h3, p, button rules from here) */
+.main-content {
+  margin-left: 200px;  /* same as .sidebar width */
+  padding: 20px;
+}

@@ -1,0 +1,62 @@
+[
+  {
+    "merchID": 1,
+    "name": "Baybayin Chart T-Shirt",
+    "image": "tshirt",
+    "description": "Premium cotton t-shirt featuring complete Baybayin character chart - Perfect for learning and style",
+    "price": "₱1,250.00",
+    "sizes": ["S", "M", "L", "XL"],
+    "colors": ["Black", "White"],
+    "brandURL": "https://example.com/tshirt"
+  },
+  {
+    "merchID": 2,
+    "name": "Baybayin Chart Hoodie",
+    "image": "hoodie",
+    "description": "Comfortable hoodie with Baybayin chart design - Stay warm while representing Filipino heritage",
+    "price": "₱2,150.00",
+    "sizes": ["M", "L", "XL"],
+    "colors": ["Gray", "Black"],
+    "brandURL": "https://example.com/hoodie"
+  },
+  {
+    "merchID": 3,
+    "name": "Baybayin Ceramic Mug",
+    "image": "mug",
+    "description": "Start your day with culture - Premium ceramic mug featuring beautiful Baybayin characters",
+    "price": "₱850.00",
+    "sizes": [],
+    "colors": ["White"],
+    "brandURL": "https://example.com/mug"
+  },
+  {
+    "merchID": 4,
+    "name": "Baybayin ID Holder",
+    "image": "cardholder",
+    "description": "Keep your essentials safe in style with this elegant Baybayin-inspired card holder",
+    "price": "₱450.00",
+    "sizes": [],
+    "colors": ["Brown", "Black"],
+    "brandURL": "https://example.com/cardholder"
+  },
+  {
+    "merchID": 5,
+    "name": "Babae Matapang Tote Bag",
+    "image": "totebag",
+    "description": "Eco-friendly canvas tote bag with empowering Baybayin message - Perfect for everyday use",
+    "price": "₱750.00",
+    "sizes": [],
+    "colors": ["Beige", "Black"],
+    "brandURL": "https://example.com/totebag"
+  },
+  {
+    "merchID": 6,
+    "name": "Hukbo Baybayin Stickers",
+    "image": "sticker",
+    "description": "Weather-resistant vinyl stickers featuring authentic Baybayin script - Decorate your world",
+    "price": "₱299.00",
+    "sizes": [],
+    "colors": ["Multi"],
+    "brandURL": "https://example.com/sticker"
+  }
+]
