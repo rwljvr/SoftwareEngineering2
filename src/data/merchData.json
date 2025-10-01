@@ -1,62 +1,62 @@
 [
   {
     "merchID": 1,
-    "name": "Baybayin Chart T-Shirt",
+    "name": "Baybayin T-Shirt",
     "image": "tshirt",
-    "description": "Premium cotton t-shirt featuring complete Baybayin character chart - Perfect for learning and style",
-    "price": "₱1,250.00",
-    "sizes": ["S", "M", "L", "XL"],
-    "colors": ["Black", "White"],
-    "brandURL": "https://example.com/tshirt"
+    "description": "Premium cotton t-shirt featuring traditional Baybayin script design",
+    "price": "₱599",
+    "sizes": ["XS", "S", "M", "L", "XL", "XXL"],
+    "colors": ["Black", "White", "Navy", "Gray"],
+    "brandURL": "https://www.wearlegazy.com/"
   },
   {
     "merchID": 2,
-    "name": "Baybayin Chart Hoodie",
+    "name": "Baybayin Hoodie",
     "image": "hoodie",
-    "description": "Comfortable hoodie with Baybayin chart design - Stay warm while representing Filipino heritage",
-    "price": "₱2,150.00",
-    "sizes": ["M", "L", "XL"],
-    "colors": ["Gray", "Black"],
-    "brandURL": "https://example.com/hoodie"
+    "description": "Comfortable hoodie with embroidered Baybayin characters",
+    "price": "₱1,299",
+    "sizes": ["S", "M", "L", "XL", "XXL"],
+    "colors": ["Black", "Gray", "Maroon"],
+    "brandURL": "https://www.wearlegazy.com/"
   },
   {
     "merchID": 3,
-    "name": "Baybayin Ceramic Mug",
+    "name": "Baybayin Mug",
     "image": "mug",
-    "description": "Start your day with culture - Premium ceramic mug featuring beautiful Baybayin characters",
-    "price": "₱850.00",
-    "sizes": [],
-    "colors": ["White"],
-    "brandURL": "https://example.com/mug"
+    "description": "Ceramic mug with beautiful Baybayin artwork",
+    "price": "₱299",
+    "sizes": ["Standard"],
+    "colors": ["White", "Black"],
+    "brandURL": "https://www.wearlegazy.com/products/baybayin-mug"
   },
   {
     "merchID": 4,
-    "name": "Baybayin ID Holder",
+    "name": "Baybayin Card Holder",
     "image": "cardholder",
-    "description": "Keep your essentials safe in style with this elegant Baybayin-inspired card holder",
-    "price": "₱450.00",
-    "sizes": [],
-    "colors": ["Brown", "Black"],
-    "brandURL": "https://example.com/cardholder"
+    "description": "Stylish leather card holder with Baybayin design",
+    "price": "₱399",
+    "sizes": ["Standard"],
+    "colors": ["Brown", "Black", "Tan"],
+    "brandURL": "https://www.wearlegazy.com/products/baybayin-id-holder-kuwadro"
   },
   {
     "merchID": 5,
-    "name": "Babae Matapang Tote Bag",
+    "name": "Baybayin Tote Bag",
     "image": "totebag",
-    "description": "Eco-friendly canvas tote bag with empowering Baybayin message - Perfect for everyday use",
-    "price": "₱750.00",
-    "sizes": [],
-    "colors": ["Beige", "Black"],
-    "brandURL": "https://example.com/totebag"
+    "description": "Eco-friendly canvas tote bag with Baybayin print",
+    "price": "₱499",
+    "sizes": ["Standard"],
+    "colors": ["Natural", "Black", "Navy"],
+    "brandURL": "https://www.wearlegazy.com/collections/baybayin-bags"
   },
   {
     "merchID": 6,
-    "name": "Hukbo Baybayin Stickers",
+    "name": "Baybayin Sticker Pack",
     "image": "sticker",
-    "description": "Weather-resistant vinyl stickers featuring authentic Baybayin script - Decorate your world",
-    "price": "₱299.00",
-    "sizes": [],
-    "colors": ["Multi"],
-    "brandURL": "https://example.com/sticker"
+    "description": "Set of 10 weather-resistant Baybayin stickers",
+    "price": "₱149",
+    "sizes": ["Small", "Medium", "Large"],
+    "colors": ["Multi-color"],
+    "brandURL": "https://www.teepublic.com/stickers/baybayin?page=3&msockid=0b46ca7eb8e368d730d4df0db93a6974"
   }
 ]
