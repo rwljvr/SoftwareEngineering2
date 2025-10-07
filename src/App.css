@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .app {
   display: flex;
   min-height: 100vh;
@@ -11,4 +12,18 @@
 .main-content {
   margin-left: 220px; /* same as sidebar width */
   width: calc(100% - 220px);
+=======
+/* App layout only – no page-specific styles here */
+.app {
+  display: flex;
+  min-height: 100vh;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+/* (Remove any .sidebar, .homepage, .content, h3, p, button rules from here) */
+.main-content {
+  margin-left: 200px;  /* same as .sidebar width */
+  padding: 20px;
+>>>>>>> 048ac60c2b2aa8e1ee017b02d0dd21445901065f
 }
