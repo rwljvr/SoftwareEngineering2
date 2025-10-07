@@ -1,18 +1,9 @@
-<<<<<<< HEAD
 /* ========= HOMEPAGE ========= */
-
-/* Homepage container */
-.homepage {
-  width: 100%;                    /* ✅ Full width handled by App.css */
-  margin-left: 0;                 /* ✅ No extra offset */
-=======
-/*HomePage.css*/
 
 /* Homepage container */
 .homepage {
   width: calc(100% - 220px); /* Account for sidebar width */
   margin-left: 220px;         /* Push content right of sidebar */
->>>>>>> 048ac60c2b2aa8e1ee017b02d0dd21445901065f
   min-height: 100vh;
   background: url("../assets/images/Baybayin-bg.jpg") no-repeat center center / cover;
   display: flex;
@@ -22,56 +13,30 @@
   padding: 0 6vw 60px;
   position: relative;
   font-family: 'Poppins', sans-serif;
-<<<<<<< HEAD
-  overflow: hidden;               /* ✅ Prevents scrollbars */
+  overflow: hidden;               /* Prevent scrollbars */
   box-sizing: border-box;
-=======
->>>>>>> 048ac60c2b2aa8e1ee017b02d0dd21445901065f
 }
 
 /* Dark overlay behind content */
 .homepage::before {
   content: "";
   position: absolute;
-<<<<<<< HEAD
-  inset: 0;                       /* ✅ Cleaner shorthand */
+  inset: 0;
   background: rgba(0, 0, 0, 0.65);
   z-index: 0;
   pointer-events: none;
 }
 
 /* Header Title */
-=======
-  inset: 0;
-  background: rgba(0, 0, 0, 0.55);
-  z-index: 0;
-}
-
-/* Header Title (non-fixed) */
->>>>>>> 048ac60c2b2aa8e1ee017b02d0dd21445901065f
 .homepage-header {
   position: relative;
   width: 100%;
   padding: 40px 20px 20px;
   text-align: center;
-<<<<<<< HEAD
-  color: #f4d799;
-  background: rgba(27, 27, 27, 0.192);
-  z-index: 1;
-  margin-top: 0;
-}
-
-.homepage-header h1 {
-  font-size: 25px;
-  margin: 0;
-  text-transform: uppercase;
-  color: #f4d799;
-  text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.9);
-=======
   color: #dbc084;
   background: rgba(27, 27, 27, 0.192);
   z-index: 1;
-  margin-top: 0; /* Remove any top margin that might interfere */
+  margin-top: 0;
 }
 
 .homepage-header h1 {
@@ -80,7 +45,6 @@
   text-transform: uppercase;
   color: #dbc084;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
->>>>>>> 048ac60c2b2aa8e1ee017b02d0dd21445901065f
   font-weight: 600;
   letter-spacing: 1.5px;
 }
@@ -88,22 +52,14 @@
 /* Content area */
 .homepage .content {
   max-width: 760px;
-<<<<<<< HEAD
-  text-align: center;
-=======
-  text-align: left;
->>>>>>> 048ac60c2b2aa8e1ee017b02d0dd21445901065f
   position: relative;
   z-index: 1;
   padding: 40px 0 0;
   background: transparent;
   border: none;
   box-shadow: none;
-<<<<<<< HEAD
   scroll-margin-top: 20px;
-=======
-  scroll-margin-top: 20px; /* Add scroll margin for better positioning */
->>>>>>> 048ac60c2b2aa8e1ee017b02d0dd21445901065f
+  text-align: left;
 }
 
 /* Section heading */
@@ -112,22 +68,11 @@
   margin: 0 0 12px;
   font-weight: 700;
   text-transform: uppercase;
-<<<<<<< HEAD
   color: #f4d799;
   text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.9);
 }
 
-/* Separator bar */
-=======
-  color: #dbc084;
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-}
-
 /* Separator bar under heading */
->>>>>>> 048ac60c2b2aa8e1ee017b02d0dd21445901065f
 .homepage .content .separator {
   height: 3px;
   background: linear-gradient(90deg, transparent, #dbc084, transparent);
@@ -141,30 +86,20 @@
 .homepage .content p {
   font-size: 20px;
   line-height: 1.7;
-<<<<<<< HEAD
-  color: #f5e6c8;
-  margin: 0 0 22px;
-  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9);
-  font-weight: 400;
-=======
   color: rgba(219, 192, 132, 0.9);
   margin: 0 0 22px;
   background: transparent;
   border: none;
   box-shadow: none;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
->>>>>>> 048ac60c2b2aa8e1ee017b02d0dd21445901065f
+  font-weight: 400;
 }
 
 /* Buttons container */
 .homepage .content .buttons {
   display: flex;
   gap: 20px;
-<<<<<<< HEAD
-  justify-content: center;
-=======
   justify-content: flex-start;
->>>>>>> 048ac60c2b2aa8e1ee017b02d0dd21445901065f
   margin-top: 10px;
 }
 
@@ -181,6 +116,7 @@
   font-family: 'Poppins', sans-serif;
 }
 
+/* Yellow button */
 .homepage .content .btn-yellow {
   background: linear-gradient(45deg, #dbc084, #f4d799);
   color: #2c2c2c;
@@ -192,6 +128,7 @@
   transform: translateY(-2px);
 }
 
+/* Green button */
 .homepage .content .btn-green {
   background: transparent;
   color: #dbc084;
@@ -205,14 +142,16 @@
   transform: translateY(-2px);
 }
 
+/* Button hover opacity */
 .homepage .content button:hover {
   opacity: 0.95;
 }
 
-/* Mobile responsiveness */
+/* ========== MOBILE RESPONSIVE ========== */
 @media (max-width: 768px) {
   .homepage {
-<<<<<<< HEAD
+    width: 100%;
+    margin-left: 0;
     padding: 60px 4vw 60px;
   }
 
@@ -232,38 +171,11 @@
     font-size: 18px;
   }
 
-=======
-    width: 100%;
-    margin-left: 0;
-    padding: 0 4vw 60px;
-  }
-  
-  .homepage-header {
-    padding: 20px 15px 15px;
-  }
-  
-  .homepage-header h1 {
-    font-size: 24px;
-  }
-  
-  .homepage .content h3 {
-    font-size: 28px;
-  }
-  
-  .homepage .content p {
-    font-size: 18px;
-  }
-  
->>>>>>> 048ac60c2b2aa8e1ee017b02d0dd21445901065f
   .homepage .content .buttons {
     flex-direction: column;
     align-items: center;
   }
-<<<<<<< HEAD
 
-=======
-  
->>>>>>> 048ac60c2b2aa8e1ee017b02d0dd21445901065f
   .homepage .content button {
     width: 200px;
     font-size: 14px;
@@ -272,20 +184,13 @@
 
 @media (max-width: 480px) {
   .homepage {
-<<<<<<< HEAD
     padding: 60px 3vw 40px;
   }
 
-=======
-    padding: 0 3vw 40px;
-  }
-  
->>>>>>> 048ac60c2b2aa8e1ee017b02d0dd21445901065f
   .homepage-header h1 {
     font-size: 20px;
     letter-spacing: 1px;
   }
-<<<<<<< HEAD
 
   .homepage .content h3 {
     font-size: 24px;
@@ -295,14 +200,3 @@
     font-size: 16px;
   }
 }
-=======
-  
-  .homepage .content h3 {
-    font-size: 24px;
-  }
-  
-  .homepage .content p {
-    font-size: 16px;
-  }
-}
->>>>>>> 048ac60c2b2aa8e1ee017b02d0dd21445901065f
