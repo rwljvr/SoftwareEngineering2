@@ -1,0 +1,62 @@
+[
+  {
+    "merchID": 1,
+    "name": "Baybayin T-Shirt",
+    "image": "tshirt",
+    "description": "Premium cotton t-shirt featuring traditional Baybayin script design",
+    "price": "₱599",
+    "sizes": ["XS", "S", "M", "L", "XL", "XXL"],
+    "colors": ["Black", "White", "Navy", "Gray"],
+    "brandURL": "https://www.wearlegazy.com/"
+  },
+  {
+    "merchID": 2,
+    "name": "Baybayin Hoodie",
+    "image": "hoodie",
+    "description": "Comfortable hoodie with embroidered Baybayin characters",
+    "price": "₱1,299",
+    "sizes": ["S", "M", "L", "XL", "XXL"],
+    "colors": ["Black", "Gray", "Maroon"],
+    "brandURL": "https://www.wearlegazy.com/"
+  },
+  {
+    "merchID": 3,
+    "name": "Baybayin Mug",
+    "image": "mug",
+    "description": "Ceramic mug with beautiful Baybayin artwork",
+    "price": "₱299",
+    "sizes": ["Standard"],
+    "colors": ["White", "Black"],
+    "brandURL": "https://www.wearlegazy.com/products/baybayin-mug"
+  },
+  {
+    "merchID": 4,
+    "name": "Baybayin Card Holder",
+    "image": "cardholder",
+    "description": "Stylish leather card holder with Baybayin design",
+    "price": "₱399",
+    "sizes": ["Standard"],
+    "colors": ["Brown", "Black", "Tan"],
+    "brandURL": "https://www.wearlegazy.com/products/baybayin-id-holder-kuwadro"
+  },
+  {
+    "merchID": 5,
+    "name": "Baybayin Tote Bag",
+    "image": "totebag",
+    "description": "Eco-friendly canvas tote bag with Baybayin print",
+    "price": "₱499",
+    "sizes": ["Standard"],
+    "colors": ["Natural", "Black", "Navy"],
+    "brandURL": "https://www.wearlegazy.com/collections/baybayin-bags"
+  },
+  {
+    "merchID": 6,
+    "name": "Baybayin Sticker Pack",
+    "image": "sticker",
+    "description": "Set of 10 weather-resistant Baybayin stickers",
+    "price": "₱149",
+    "sizes": ["Small", "Medium", "Large"],
+    "colors": ["Multi-color"],
+    "brandURL": "https://www.teepublic.com/stickers/baybayin?page=3&msockid=0b46ca7eb8e368d730d4df0db93a6974"
+  }
+]

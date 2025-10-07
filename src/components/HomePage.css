@@ -1,0 +1,194 @@
+/* ========= HOMEPAGE ========= */
+
+/* Homepage container */
+.homepage {
+  width: 100%;                    /* ✅ Full width handled by App.css */
+  margin-left: 0;                 /* ✅ No extra offset */
+  min-height: 100vh;
+  background: url("../assets/images/Baybayin-bg.jpg") no-repeat center center / cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 6vw 60px;
+  position: relative;
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;               /* ✅ Prevents scrollbars */
+  box-sizing: border-box;
+}
+
+/* Dark overlay behind content */
+.homepage::before {
+  content: "";
+  position: absolute;
+  inset: 0;                       /* ✅ Cleaner shorthand */
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Header Title */
+.homepage-header {
+  position: relative;
+  width: 100%;
+  padding: 40px 20px 20px;
+  text-align: center;
+  color: #f4d799;
+  background: rgba(27, 27, 27, 0.192);
+  z-index: 1;
+  margin-top: 0;
+}
+
+.homepage-header h1 {
+  font-size: 25px;
+  margin: 0;
+  text-transform: uppercase;
+  color: #f4d799;
+  text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.9);
+  font-weight: 600;
+  letter-spacing: 1.5px;
+}
+
+/* Content area */
+.homepage .content {
+  max-width: 760px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  padding: 40px 0 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  scroll-margin-top: 20px;
+}
+
+/* Section heading */
+.homepage .content h3 {
+  font-size: 25px;
+  margin: 0 0 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #f4d799;
+  text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.9);
+}
+
+/* Separator bar */
+.homepage .content .separator {
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #dbc084, transparent);
+  opacity: 0.9;
+  border-radius: 2px;
+  margin: 8px 0 22px;
+  width: 100%;
+}
+
+/* Paragraphs */
+.homepage .content p {
+  font-size: 20px;
+  line-height: 1.7;
+  color: #f5e6c8;
+  margin: 0 0 22px;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9);
+  font-weight: 400;
+}
+
+/* Buttons container */
+.homepage .content .buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+/* Buttons */
+.homepage .content button {
+  padding: 14px 24px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 14px;
+  font-size: 15px;
+  transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+  font-family: 'Poppins', sans-serif;
+}
+
+.homepage .content .btn-yellow {
+  background: linear-gradient(45deg, #dbc084, #f4d799);
+  color: #2c2c2c;
+}
+
+.homepage .content .btn-yellow:hover {
+  background: linear-gradient(45deg, #f4d799, #dbc084);
+  box-shadow: 0 6px 20px rgba(219, 192, 132, 0.4);
+  transform: translateY(-2px);
+}
+
+.homepage .content .btn-green {
+  background: transparent;
+  color: #dbc084;
+  border: 2px solid #dbc084;
+}
+
+.homepage .content .btn-green:hover {
+  background: #dbc084;
+  color: #2c2c2c;
+  box-shadow: 0 6px 20px rgba(219, 192, 132, 0.3);
+  transform: translateY(-2px);
+}
+
+.homepage .content button:hover {
+  opacity: 0.95;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .homepage {
+    padding: 60px 4vw 60px;
+  }
+
+  .homepage-header {
+    padding: 20px 15px 15px;
+  }
+
+  .homepage-header h1 {
+    font-size: 24px;
+  }
+
+  .homepage .content h3 {
+    font-size: 28px;
+  }
+
+  .homepage .content p {
+    font-size: 18px;
+  }
+
+  .homepage .content .buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .homepage .content button {
+    width: 200px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .homepage {
+    padding: 60px 3vw 40px;
+  }
+
+  .homepage-header h1 {
+    font-size: 20px;
+    letter-spacing: 1px;
+  }
+
+  .homepage .content h3 {
+    font-size: 24px;
+  }
+
+  .homepage .content p {
+    font-size: 16px;
+  }
+}

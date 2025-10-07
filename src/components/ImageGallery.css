@@ -1,0 +1,58 @@
+/*ImageGallery.css*/
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;       /* ✅ allows wrapping */
+  gap: 15px;             /* ✅ space between images */
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.gallery .thumbnail {
+  flex: 1 1 calc(33.333% - 15px); /* ✅ 3 per row, adjust on smaller screens */
+  max-width: calc(33.333% - 15px);
+  border: 2px solid rgba(219, 192, 132, 0.3);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.gallery .thumbnail:hover {
+  transform: translateY(-5px) scale(1.02);
+  border-color: #dbc084;
+  box-shadow: 0 8px 25px rgba(219, 192, 132, 0.4);
+}
+
+.gallery .thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.gallery .thumbnail:hover img {
+  transform: scale(1.1);
+}
+
+/* ✅ On tablets (2 per row) */
+@media (max-width: 768px) {
+  .gallery .thumbnail {
+    flex: 1 1 calc(50% - 15px);
+    max-width: calc(50% - 15px);
+  }
+}
+
+/* ✅ On phones (1 per row) */
+@media (max-width: 480px) {
+  .gallery .thumbnail {
+    flex: 1 1 100%;
+    max-width: 100%;
+    border-radius: 10px;
+  }
+  
+  .gallery {
+    gap: 12px;
+  }
+}
