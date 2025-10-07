@@ -32,8 +32,7 @@ class HomePage extends Page {
   // ✅ SOLUTION 1: Improved scroll function with better offset calculation
   scrollToSection = (section) => {
     // Calculate proper offset based on viewport and sidebar
-    const isMobile = window.innerWidth <= 768;
-    const sidebarWidth = isMobile ? 0 : 220; // Sidebar is hidden on mobile
+    
     const additionalOffset = 20; // Extra padding for better positioning
     
     scroller.scrollTo(section, {
@@ -105,6 +104,7 @@ class HomePage extends Page {
   renderContent() {
     return (
       <div className="homepage">
+        
         {/* Header Title */}
         <motion.header
           className="homepage-header"

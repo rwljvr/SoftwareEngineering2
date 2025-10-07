@@ -18,6 +18,10 @@
   font-family: 'Poppins', sans-serif;
   overflow-y: auto;
   overflow-x: hidden;
+  transition: width 0.3s ease;
+}
+.main-content {
+  transition: margin-left 0.3s ease;
 }
 
 /* Collapsed state */
@@ -68,6 +72,13 @@
   transform: scale(1.05);
 }
 
+.collapsed .sidebar-header,
+.collapsed .sidebar-bottom {
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  transition: opacity 0.3s ease, height 0.3s ease, padding 0.3s ease, margin 0.3s ease;
+}
 .collapsed .collapse-btn {
   right: 50%;
   transform: translateX(50%);

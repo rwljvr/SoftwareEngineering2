@@ -103,17 +103,7 @@
   overflow: hidden;
 }
 
-.merch-container {
-  margin-left: 220px; /* sidebar width */
-  max-width: calc(100% - 220px);
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  position: relative;
-  z-index: 1; /* make sure it sits above background overlay */
-}
+
 .merch-image {
   width: 100%;
   height: 100%;
