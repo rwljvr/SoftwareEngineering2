@@ -2,8 +2,8 @@
 
 /* Homepage container */
 .homepage {
-  width: calc(100% - 220px); /* Account for sidebar width */
-  margin-left: 220px;         /* Push content right of sidebar */
+  width: 100%;                    /* ✅ Full width handled by App.css */
+  margin-left: 0;                 /* ✅ No extra offset */
   min-height: 100vh;
   background: url("../assets/images/Baybayin-bg.jpg") no-repeat center center / cover;
   display: flex;
@@ -13,7 +13,7 @@
   padding: 0 6vw 60px;
   position: relative;
   font-family: 'Poppins', sans-serif;
-  overflow: hidden;               /* Prevent scrollbars */
+  overflow: hidden;               /* ✅ Prevents scrollbars */
   box-sizing: border-box;
 }
 
@@ -21,7 +21,7 @@
 .homepage::before {
   content: "";
   position: absolute;
-  inset: 0;
+  inset: 0;                       /* ✅ Cleaner shorthand */
   background: rgba(0, 0, 0, 0.65);
   z-index: 0;
   pointer-events: none;
@@ -33,18 +33,18 @@
   width: 100%;
   padding: 40px 20px 20px;
   text-align: center;
-  color: #dbc084;
+  color: #f4d799;
   background: rgba(27, 27, 27, 0.192);
   z-index: 1;
   margin-top: 0;
 }
 
 .homepage-header h1 {
-  font-size: 30px;
+  font-size: 25px;
   margin: 0;
   text-transform: uppercase;
-  color: #dbc084;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  color: #f4d799;
+  text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.9);
   font-weight: 600;
   letter-spacing: 1.5px;
 }
@@ -52,6 +52,7 @@
 /* Content area */
 .homepage .content {
   max-width: 760px;
+  text-align: center;
   position: relative;
   z-index: 1;
   padding: 40px 0 0;
@@ -59,8 +60,8 @@
   border: none;
   box-shadow: none;
   scroll-margin-top: 20px;
-  text-align: left;
 }
+
 
 /* Section heading */
 .homepage .content h3 {
@@ -72,7 +73,7 @@
   text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.9);
 }
 
-/* Separator bar under heading */
+/* Separator bar */
 .homepage .content .separator {
   height: 3px;
   background: linear-gradient(90deg, transparent, #dbc084, transparent);
@@ -86,12 +87,9 @@
 .homepage .content p {
   font-size: 20px;
   line-height: 1.7;
-  color: rgba(219, 192, 132, 0.9);
+  color: #f5e6c8;
   margin: 0 0 22px;
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9);
   font-weight: 400;
 }
 
@@ -99,7 +97,7 @@
 .homepage .content .buttons {
   display: flex;
   gap: 20px;
-  justify-content: flex-start;
+  justify-content: center;
   margin-top: 10px;
 }
 
@@ -116,7 +114,6 @@
   font-family: 'Poppins', sans-serif;
 }
 
-/* Yellow button */
 .homepage .content .btn-yellow {
   background: linear-gradient(45deg, #dbc084, #f4d799);
   color: #2c2c2c;
@@ -128,7 +125,6 @@
   transform: translateY(-2px);
 }
 
-/* Green button */
 .homepage .content .btn-green {
   background: transparent;
   color: #dbc084;
@@ -142,16 +138,13 @@
   transform: translateY(-2px);
 }
 
-/* Button hover opacity */
 .homepage .content button:hover {
   opacity: 0.95;
 }
 
-/* ========== MOBILE RESPONSIVE ========== */
+/* Mobile responsiveness */
 @media (max-width: 768px) {
   .homepage {
-    width: 100%;
-    margin-left: 0;
     padding: 60px 4vw 60px;
   }
 

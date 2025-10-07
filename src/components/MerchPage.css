@@ -1,20 +1,13 @@
 .merch-page {
   min-height: 100vh;
   padding: 80px 40px;
-<<<<<<< HEAD
   /* Remove margin-left */
-=======
-  margin-left: 220px; /* match sidebar width */
->>>>>>> 048ac60c2b2aa8e1ee017b02d0dd21445901065f
   background: url("../assets/images/background2.png") no-repeat center center / cover;
   position: relative;
   color: #dbc084;
   font-family: 'Poppins', sans-serif;
-<<<<<<< HEAD
   overflow-x: hidden; /* prevent horizontal scroll */
   box-sizing: border-box;
-=======
->>>>>>> 048ac60c2b2aa8e1ee017b02d0dd21445901065f
 }
 
 .merch-page::before {
@@ -110,6 +103,17 @@
   overflow: hidden;
 }
 
+.merch-container {
+  margin-left: 220px; /* sidebar width */
+  max-width: calc(100% - 220px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  z-index: 1; /* make sure it sits above background overlay */
+}
 .merch-image {
   width: 100%;
   height: 100%;
