@@ -92,6 +92,7 @@ export default function OriginsPage() {
   return (
     <Element name="origins">
       <div className="origins-page">
+        {/* Hero Section */}
         <div className="hero-content">
           <h1 className="main-title">{historyPage.title.toUpperCase()}</h1>
           <p className="subtitle">
@@ -100,7 +101,7 @@ export default function OriginsPage() {
           </p>
         </div>
 
-        {/* Timeline */}
+        {/* Timeline Section */}
         <div className="timeline-container">
           <div className="timeline-line"></div>
 
@@ -135,6 +136,34 @@ export default function OriginsPage() {
               </div>
             </div>
           )}
+        </div>
+
+        {/* Did You Know Section */}
+        <div className="did-you-know">
+          <h2>Did You Know?</h2>
+          <div className="facts-grid">
+            {[
+              {
+                front: "Baybayin wasn’t the only script in the Philippines!",
+                back: "Other regions had scripts too—like Kulitan in Pampanga and Badlit in the Visayas."
+              },
+              {
+                front: "Baybayin has 17 basic characters.",
+                back: "There are 3 vowels (ᜀ, ᜁ, ᜂ) and 14 consonants, each with an inherent 'a' sound."
+              },
+              {
+                front: "The name Baybayin means “to spell”.",
+                back: "It comes from the Tagalog word 'baybay', showing how the script was used phonetically."
+              }
+            ].map((fact, i) => (
+              <div key={i} className="fact-card">
+                <div className="card-inner">
+                  <div className="card-front">{fact.front}</div>
+                  <div className="card-back">{fact.back}</div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </Element>

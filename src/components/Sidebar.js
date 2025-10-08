@@ -1,8 +1,17 @@
 import React, { useState } from "react";
 import { Link } from "react-scroll";
-import { Globe, Twitter, Facebook, Instagram, Home, Info, BookOpen, ShoppingBag, Menu } from "lucide-react";
+import {
+  Globe,
+  Twitter,
+  Facebook,
+  Instagram,
+  Home,
+  Info,
+  BookOpen,
+  ShoppingBag,
+  Menu,
+} from "lucide-react";
 import "./Sidebar.css";
-
 import badgeLogo from "../assets/images/badge-logo.png";
 
 export default function Sidebar({ onToggle }) {
@@ -31,19 +40,46 @@ export default function Sidebar({ onToggle }) {
 
       {/* Navigation */}
       <nav>
-        <Link to="home" smooth={true} duration={500} spy={true} activeClass="active-link">
+        <Link
+          to="home"
+          smooth={true}
+          duration={500}
+          spy={true}
+          activeClass="active-link"
+        >
           <Home className="nav-icon" size={20} />
           <span>Home</span>
         </Link>
-        <Link to="about" smooth={true} duration={600} spy={true} activeClass="active-link">
+
+        <Link
+          to="about"
+          smooth={true}
+          duration={600}
+          spy={true}
+          activeClass="active-link"
+        >
           <Info className="nav-icon" size={20} />
           <span>About</span>
         </Link>
-        <Link to="origins" smooth={true} duration={600} spy={true} activeClass="active-link">
+
+        <Link
+          to="origins"
+          smooth={true}
+          duration={600}
+          spy={true}
+          activeClass="active-link"
+        >
           <BookOpen className="nav-icon" size={20} />
           <span>Origins</span>
         </Link>
-        <Link to="merch" smooth={true} duration={600} spy={true} activeClass="active-link">
+
+        <Link
+          to="merch"
+          smooth={true}
+          duration={600}
+          spy={true}
+          activeClass="active-link"
+        >
           <ShoppingBag className="nav-icon" size={20} />
           <span>Merch</span>
         </Link>
@@ -53,13 +89,53 @@ export default function Sidebar({ onToggle }) {
       <div className="sidebar-bottom">
         <div className="csa9-box">Share this!</div>
         <div className="socials">
-          <a href="https://example.com" target="_blank" rel="noopener noreferrer"><Globe size={18} /></a>
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"><Twitter size={18} /></a>
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"><Facebook size={18} /></a>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"><Instagram size={18} /></a>
+          {/* 🌐 Website */}
+          <a
+            href="https://filipinomuna.vercel.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Visit our website"
+          >
+            <Globe size={18} />
+          </a>
+
+          {/* 🐦 Twitter / X */}
+          <a
+            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
+              "Check out Filipino Muna! 🇵🇭 Learn Baybayin and Filipino culture:"
+            )}&url=${encodeURIComponent("https://filipinomuna.vercel.app")}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Share on Twitter"
+          >
+            <Twitter size={18} />
+          </a>
+
+          {/* 📘 Facebook */}
+          <a
+            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+              "https://filipinomuna.vercel.app"
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Share on Facebook"
+          >
+            <Facebook size={18} />
+          </a>
+
+          {/* 📸 Instagram */}
+          <a
+            href="https://www.instagram.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Share on Instagram (copy link manually)"
+          >
+            <Instagram size={18} />
+          </a>
         </div>
+
         <div className="sidebar-footer">© 2025 Filipino Muna</div>
       </div>
-    </div>
+    </div> // ✅ properly closes the outer sidebar div
   );
 }
