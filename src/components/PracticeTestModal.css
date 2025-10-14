@@ -1,0 +1,69 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+}
+
+.question-number {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.question-text {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.option-btn {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  background: #f7f7f7;
+  cursor: pointer;
+}
+
+.option-btn.selected {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.next-btn, .restart-btn, .close-btn {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.next-btn { background: #28a745; color: white; }
+.restart-btn { background: #007bff; color: white; }
+.close-btn { background: #dc3545; color: white; }

@@ -1,4 +1,8 @@
+
 // File: src/components/AboutPage.js
+
+import NameEntryModal from "./NameEntryModal";
+import PracticeTestModal from "./PracticeTestModal";
   import React from "react";
   import { Element } from "react-scroll";
   import { Swiper, SwiperSlide } from "swiper/react";
@@ -49,6 +53,10 @@
   import taGif from "../assets/images/TA.gif";
   import waGif from "../assets/images/WA.gif";
   import yaGif from "../assets/images/YA.gif";
+  const getRandomQuestions = (questions, num = 10) => {
+  const shuffled = [...questions].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, num);
+};
 
   const baybayinChars = [
     char1, char2, char3, char4, char5,
@@ -63,92 +71,195 @@
   ];
 
   // Quiz questions with character recognition and trivia
-  const quizQuestions = [
-    {
-      type: 'trivia',
-      question: 'What does the term "Baybayin" come from?',
-      options: [
-        'The Tagalog root word "baybay" meaning "to spell"',
-        'A Spanish word for writing',
-        'An ancient king\'s name',
-        'A type of bamboo used for writing'
-      ],
-      correct: 0
-    },
-    {
-      type: 'trivia',
-      question: 'When was the National Writing System Act (House Bill 1022) signed into law?',
-      options: [
-        'January 1, 2016',
-        'April 3, 2018',
-        'June 12, 2019',
-        'December 30, 2020'
-      ],
-      correct: 1
-    },
-    {
-      type: 'character',
-      question: 'Which pronunciation does this character represent?',
-      image: baGif,
-      options: ['BA', 'DA', 'GA', 'HA'],
-      correct: 0
-    },
-    {
-      type: 'trivia',
-      question: 'Baybayin belongs to which family of scripts?',
-      options: [
-        'Latin family',
-        'Arabic family',
-        'Brahmic family',
-        'Chinese family'
-      ],
-      correct: 2
-    },
-    {
-      type: 'character',
-      question: 'Which pronunciation does this character represent?',
-      image: ngaGif,
-      options: ['NA', 'NGA', 'MA', 'LA'],
-      correct: 1
-    },
-    {
-      type: 'trivia',
-      question: 'How many basic strokes are used to construct Baybayin characters?',
-      options: ['Two', 'Three', 'Four', 'Five'],
-      correct: 2
-    },
-    {
-      type: 'character',
-      question: 'Which pronunciation does this character represent?',
-      image: kaGif,
-      options: ['KA', 'TA', 'PA', 'SA'],
-      correct: 0
-    },
-    {
-      type: 'trivia',
-      question: 'Which of these is NOT a related Philippine script descended from Baybayin?',
-      options: ['Hanunuo', 'Buhid', 'Tagbanwa', 'Alibata'],
-      correct: 3
-    },
-    {
-      type: 'character',
-      question: 'Which pronunciation does this character represent?',
-      image: waGif,
-      options: ['WA', 'YA', 'RA', 'LA'],
-      correct: 0
-    },
-    {
-      type: 'trivia',
-      question: 'What type of writing system is Baybayin?',
-      options: [
-        'Alphabetic',
-        'Logographic',
-        'Syllabic',
-        'Ideographic'
-      ],
-      correct: 2
-    }
-  ];
+  const quizQuestions =  [
+  // --- Existing 10 ---
+  {
+    type: 'trivia',
+    question: 'What does the term "Baybayin" come from?',
+    options: [
+      'The Tagalog root word "baybay" meaning "to spell"',
+      'A Spanish word for writing',
+      'An ancient king\'s name',
+      'A type of bamboo used for writing'
+    ],
+    correct: 0
+  },
+  {
+    type: 'trivia',
+    question: 'When was the National Writing System Act (House Bill 1022) signed into law?',
+    options: [
+      'January 1, 2016',
+      'April 3, 2018',
+      'June 12, 2019',
+      'December 30, 2020'
+    ],
+    correct: 1
+  },
+  {
+    type: 'character',
+    question: 'Which pronunciation does this character represent?',
+    image: baGif,
+    options: ['BA', 'DA', 'GA', 'HA'],
+    correct: 0
+  },
+  {
+    type: 'trivia',
+    question: 'Baybayin belongs to which family of scripts?',
+    options: ['Latin family', 'Arabic family', 'Brahmic family', 'Chinese family'],
+    correct: 2
+  },
+  {
+    type: 'character',
+    question: 'Which pronunciation does this character represent?',
+    image: ngaGif,
+    options: ['NA', 'NGA', 'MA', 'LA'],
+    correct: 1
+  },
+  {
+    type: 'trivia',
+    question: 'How many basic strokes are used to construct Baybayin characters?',
+    options: ['Two', 'Three', 'Four', 'Five'],
+    correct: 2
+  },
+  {
+    type: 'character',
+    question: 'Which pronunciation does this character represent?',
+    image: kaGif,
+    options: ['KA', 'TA', 'PA', 'SA'],
+    correct: 0
+  },
+  {
+    type: 'trivia',
+    question: 'Which of these is NOT a related Philippine script descended from Baybayin?',
+    options: ['Hanunuo', 'Buhid', 'Tagbanwa', 'Alibata'],
+    correct: 3
+  },
+  {
+    type: 'character',
+    question: 'Which pronunciation does this character represent?',
+    image: waGif,
+    options: ['WA', 'YA', 'RA', 'LA'],
+    correct: 0
+  },
+  {
+    type: 'trivia',
+    question: 'What type of writing system is Baybayin?',
+    options: ['Alphabetic', 'Logographic', 'Syllabic', 'Ideographic'],
+    correct: 2
+  },
+
+  // --- New 15 questions ---
+  {
+    type: 'trivia',
+    question: 'What materials were traditionally used for writing Baybayin?',
+    options: ['Paper and ink', 'Bamboo, bark, or palm leaves', 'Stone tablets', 'Animal skin'],
+    correct: 1
+  },
+  {
+    type: 'trivia',
+    question: 'During what period did Baybayin continue to be used?',
+    options: ['Only pre-colonial period', 'Spanish colonization until the late 19th century', 'World War II', 'Modern digital age'],
+    correct: 1
+  },
+  {
+    type: 'trivia',
+    question: 'Which ancient region influenced the development of Baybayin?',
+    options: ['Mesopotamia', 'Ancient India', 'China', 'Egypt'],
+    correct: 1
+  },
+  {
+    type: 'trivia',
+    question: 'What does each Baybayin character represent?',
+    options: ['A single consonant', 'A syllable', 'A vowel only', 'A phrase'],
+    correct: 1
+  },
+  {
+    type: 'trivia',
+    question: 'What is one of the key purposes of House Bill 1022?',
+    options: [
+      'To remove Baybayin from schools',
+      'To teach Baybayin as part of the Filipino language curriculum',
+      'To promote English over Baybayin',
+      'To use Baybayin only in government seals'
+    ],
+    correct: 1
+  },
+  {
+    type: 'trivia',
+    question: 'Which group still uses Hanunuo script for traditional poetry?',
+    options: ['Ifugao', 'Mangyan', 'Aeta', 'Tagbanwa'],
+    correct: 1
+  },
+  {
+    type: 'character',
+    question: 'Which pronunciation does this character represent?',
+    image: laGif,
+    options: ['LA', 'RA', 'NA', 'TA'],
+    correct: 0
+  },
+  {
+    type: 'character',
+    question: 'Which pronunciation does this character represent?',
+    image: maGif,
+    options: ['BA', 'PA', 'MA', 'NA'],
+    correct: 2
+  },
+  {
+    type: 'character',
+    question: 'Which pronunciation does this character represent?',
+    image: saGif,
+    options: ['SA', 'TA', 'KA', 'GA'],
+    correct: 0
+  },
+  {
+    type: 'trivia',
+    question: 'What does House Bill 1022 encourage in official documents?',
+    options: [
+      'Use of English only',
+      'Use of Baybayin alongside Filipino and English',
+      'Use of foreign languages',
+      'Removal of local scripts'
+    ],
+    correct: 1
+  },
+  {
+    type: 'trivia',
+    question: 'Which stroke resembles an upside-down "S" in Baybayin writing?',
+    options: ['Wave', 'U-shape', 'Inverted S', 'Number 3'],
+    correct: 2
+  },
+  {
+    type: 'trivia',
+    question: 'What kind of tool was often used to inscribe Baybayin characters?',
+    options: ['Feather quill', 'Pointed tool or stylus', 'Printing press', 'Paintbrush'],
+    correct: 1
+  },
+  {
+    type: 'trivia',
+    question: 'What does the House Bill 1022 promote aside from education?',
+    options: [
+      'Use of foreign scripts',
+      'Cultural preservation and research support',
+      'Economic growth programs',
+      'Tourism advertisements'
+    ],
+    correct: 1
+  },
+  {
+    type: 'character',
+    question: 'Which pronunciation does this character represent?',
+    image: taGif,
+    options: ['TA', 'PA', 'KA', 'SA'],
+    correct: 0
+  },
+  {
+    type: 'character',
+    question: 'Which pronunciation does this character represent?',
+    image: yaGif,
+    options: ['WA', 'YA', 'RA', 'LA'],
+    correct: 1
+  }
+];
 
   // FlipCard Component with Modal
   const FlipCard = ({ frontImage, backImage, index, onOpenModal }) => {
@@ -261,10 +372,14 @@
         userAnswers: [],
         showResults: false,
         score: 0,
+         showNameEntry: false,
+        playerName: "",
+        leaderboard: JSON.parse(localStorage.getItem("leaderboard")) || [],
       };
 
       this.swiperInstance = null;
     }
+    
 
     openCharacterModal = (frontImage, backImage, index) => {
       this.setState({
@@ -284,65 +399,106 @@
       });
     }
 
-    startTest = () => {
-      this.setState({
-        showTest: true,
-        currentQuestion: 0,
-        selectedAnswer: null,
-        userAnswers: [],
-        showResults: false,
-        score: 0
-      });
-    }
+   startTest = () => {
+  // pick 10 random questions from 25
+  const randomized = getRandomQuestions(quizQuestions, 10);
+  
 
+  this.setState({
+    showNameEntry: true,
+    showTest: false, // hide test until name is entered
+    currentQuestion: 0,
+    selectedAnswer: null,
+    userAnswers: [],
+    showResults: false,
+    score: 0,
+    quizSet: randomized, // store the randomized set
+  });
+};
     selectAnswer = (index) => {
       this.setState({ selectedAnswer: index });
     }
 
     nextQuestion = () => {
-      const { currentQuestion, selectedAnswer, userAnswers } = this.state;
-      const newAnswers = [...userAnswers, selectedAnswer];
-      
-      if (currentQuestion < quizQuestions.length - 1) {
-        this.setState({
-          currentQuestion: currentQuestion + 1,
-          selectedAnswer: null,
-          userAnswers: newAnswers
-        });
-      } else {
-        // Calculate score
-        const score = newAnswers.reduce((acc, answer, idx) => {
-          return acc + (answer === quizQuestions[idx].correct ? 1 : 0);
-        }, 0);
-        
-        this.setState({
-          userAnswers: newAnswers,
-          showResults: true,
-          score: score
-        });
-      }
-    }
+  const { currentQuestion, selectedAnswer, userAnswers, quizSet } = this.state;
+  const newAnswers = [...userAnswers, selectedAnswer];
 
-    restartTest = () => {
-      this.setState({
-        currentQuestion: 0,
-        selectedAnswer: null,
-        userAnswers: [],
-        showResults: false,
-        score: 0
-      });
-    }
+  if (currentQuestion < quizSet.length - 1) {
+    // Move to next question
+    this.setState({
+      currentQuestion: currentQuestion + 1,
+      selectedAnswer: null,
+      userAnswers: newAnswers
+    });
+  } else {
+  const score = newAnswers.reduce(
+    (acc, answer, idx) => acc + (answer === quizSet[idx].correct ? 1 : 0),
+    0
+  );
 
-    closeTest = () => {
-      this.setState({
-        showTest: false,
-        currentQuestion: 0,
-        selectedAnswer: null,
-        userAnswers: [],
-        showResults: false,
-        score: 0
-      });
-    }
+  const newLeaderboard = [
+    ...this.state.leaderboard,
+    { name: this.state.playerName, score, date: new Date().toLocaleDateString() },
+  ].sort((a, b) => b.score - a.score)
+   .slice(0, 5); // top 5
+
+  localStorage.setItem("leaderboard", JSON.stringify(newLeaderboard));
+
+  this.setState({
+    userAnswers: newAnswers,
+    showResults: true,
+    score,
+    leaderboard: newLeaderboard,
+  });
+
+
+    this.setState({
+      userAnswers: newAnswers,
+      showResults: true,
+      score: score
+    });
+  }
+};
+
+
+   restartTest = () => {
+  const randomized = getRandomQuestions(quizQuestions, 10);
+  this.setState({
+    quizSet: randomized,
+    currentQuestion: 0,
+    selectedAnswer: null,
+    userAnswers: [],
+    showResults: false,
+    score: 0
+  });
+};
+handleNameSubmit = (name) => {
+  const randomized = getRandomQuestions(quizQuestions, 10);
+  this.setState({
+    playerName: name,
+    showNameEntry: false,
+    showTest: true,
+    quizSet: randomized,
+    currentQuestion: 0,
+    selectedAnswer: null,
+    userAnswers: [],
+    showResults: false,
+    score: 0,
+  });
+};
+
+
+closeTest = () => {
+  this.setState({
+    showTest: false,
+    currentQuestion: 0,
+    selectedAnswer: null,
+    userAnswers: [],
+    showResults: false,
+    score: 0,
+    quizSet: []
+  });
+};
 
     showAboutBaybayin() {
       this.setState({ showBaybayin: true, showHouseBill: false, currentSlide: 0 });
@@ -562,48 +718,140 @@
                   </div>
                   <p style={{ marginTop: "10px", textAlign: "center", fontStyle: "italic", fontSize: "0.8em" }}>
                     Modern examples of Baybayin in art, design, and cultural preservation.
+                    
                   </p>
                 </div>
               </SwiperSlide>
+{/* Practice Test Slide */}
+<SwiperSlide>
+  <div className="content" style={{ textAlign: "center" }}>
+    {/* Decorative background elements */}
+    <div
+      style={{
+        position: "absolute",
+        top: "-30px",
+        right: "-30px",
+        width: "150px",
+        height: "150px",
+        background: "radial-gradient(circle, rgba(219, 192, 132, 0.15), transparent)",
+        borderRadius: "50%",
+        filter: "blur(40px)",
+        pointerEvents: "none",
+      }}
+    />
+    <div
+      style={{
+        position: "absolute",
+        bottom: "-30px",
+        left: "-30px",
+        width: "150px",
+        height: "150px",
+        background: "radial-gradient(circle, rgba(244, 215, 153, 0.1), transparent)",
+        borderRadius: "50%",
+        filter: "blur(40px)",
+        pointerEvents: "none",
+      }}
+    />
+
+    {/* Icon/Badge */}
+    <div
+      style={{
+        width: "70px",
+        height: "70px",
+        background: "linear-gradient(135deg, #dbc084, #f4d799)",
+        borderRadius: "50%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontSize: "36px",
+        margin: "0 auto 15px",
+        boxShadow: "0 6px 20px rgba(219, 192, 132, 0.4)",
+        position: "relative",
+        zIndex: 1,
+      }}
+    >
+      📝
+    </div>
+
+    <h3 style={{ marginBottom: "10px" }}>TEST YOUR KNOWLEDGE!</h3>
+
+    <div
+      style={{
+        width: "60px",
+        height: "3px",
+        background: "linear-gradient(90deg, transparent, #dbc084, transparent)",
+        margin: "0 auto 15px",
+        borderRadius: "2px",
+      }}
+    />
+
+    <p style={{ marginBottom: "15px" }}>
+      Challenge yourself with our interactive Baybayin quiz! Test your understanding 
+      of the ancient script through character recognition and cultural trivia.
+    </p>
+
+    {/* Features list */}
+    <div
+      style={{
+        display: "flex",
+        gap: "15px",
+        marginBottom: "20px",
+        flexWrap: "wrap",
+        justifyContent: "center",
+      }}
+    >
+     
+    </div>
+
+    <button
+      onClick={this.startTest}
+      style={{
+        background: "linear-gradient(135deg, #dbc084, #f4d799)",
+        color: "#2c2c2c",
+        border: "none",
+        padding: "14px 36px",
+        borderRadius: "50px",
+        fontFamily: "Poppins, sans-serif",
+        fontWeight: "700",
+        fontSize: "16px",
+        cursor: "pointer",
+        boxShadow: "0 6px 20px rgba(219, 192, 132, 0.5)",
+        transition: "all 0.3s ease",
+        textTransform: "uppercase",
+        letterSpacing: "0.5px",
+        margin: "0 auto",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.transform = "translateY(-3px) scale(1.05)";
+        e.currentTarget.style.boxShadow = "0 8px 30px rgba(219,192,132,0.7)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = "translateY(0) scale(1)";
+        e.currentTarget.style.boxShadow = "0 6px 20px rgba(219,192,132,0.5)";
+      }}
+    >
+      Start Practice Test →
+    </button>
+
+    <p
+      style={{
+        marginTop: "15px",
+        fontSize: "12px",
+        color: "rgba(242, 233, 206, 0.7)",
+        fontStyle: "italic",
+      }}
+    >
+      No pressure — learn at your own pace!
+    </p>
+  </div>
+</SwiperSlide>
+
             </Swiper>
           </div>
 
-          {/* Practice Test Button */}
-          <div style={{
-            position: 'relative',
-            zIndex: 11,
-            marginTop: '30px',
-            textAlign: 'center'
-          }}>
-            <button
-              onClick={this.startTest}
-              style={{
-                background: 'linear-gradient(135deg, #dbc084, #f4d799)',
-                border: 'none',
-                color: '#2c2c2c',
-                padding: '16px 40px',
-                borderRadius: '12px',
-                cursor: 'pointer',
-                fontFamily: 'Poppins, sans-serif',
-                fontSize: '18px',
-                fontWeight: '700',
-                boxShadow: '0 6px 20px rgba(219, 192, 132, 0.5)',
-                transition: 'all 0.3s ease',
-                textTransform: 'uppercase',
-                letterSpacing: '1px'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-3px)';
-                e.currentTarget.style.boxShadow = '0 8px 30px rgba(219, 192, 132, 0.7)';
-              }}
-             onMouseLeave={(e) => {
-  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
-  e.currentTarget.style.borderColor = 'rgba(219, 192, 132, 0.5)';
-}}
-            >
-              📝 Take Practice Test
-            </button>
-          </div>
+
+
+          
 
           {/* Character Modal */}
           {this.state.showModal && this.state.selectedCharacter && (
@@ -625,8 +873,16 @@
               onNextQuestion={this.nextQuestion}
               onRestartTest={this.restartTest}
               onClose={this.closeTest}
+              quizSet={this.state.quizSet}
             />
           )}
+          {this.state.showNameEntry && (
+  <NameEntryModal
+    onSubmit={this.handleNameSubmit}
+    onClose={() => this.setState({ showNameEntry: false })}
+  />
+)}
+
         </Element>
       );
     }
@@ -807,190 +1063,6 @@
     );
   };
 
-  // Practice Test Modal
-  const PracticeTestModal = ({
-    currentQuestion,
-    selectedAnswer,
-    userAnswers,
-    showResults,
-    score,
-    onSelectAnswer,
-    onNextQuestion,
-    onRestartTest,
-    onClose
-  }) => {
-    const totalQuestions = quizQuestions.length;
-    const question = quizQuestions[currentQuestion];
-
-    return (
-      <div
-        className="test-modal-overlay"
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: 'rgba(0,0,0,0.85)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          zIndex: 1000,
-          backdropFilter: 'blur(5px)'
-        }}
-        onClick={onClose}
-      >
-        <div
-          className="test-modal-content"
-          onClick={(e) => e.stopPropagation()}
-          style={{
-            background: 'rgba(20, 20, 20, 0.95)',
-            border: '2px solid rgba(219, 192, 132, 0.4)',
-            borderRadius: '16px',
-            padding: '40px 30px',
-            width: '90%',
-            maxWidth: '600px',
-            boxShadow: '0 10px 30px rgba(219, 192, 132, 0.4)',
-            color: 'white',
-            fontFamily: 'Poppins, sans-serif',
-            textAlign: 'center'
-          }}
-        >
-          {!showResults ? (
-            <>
-              <h2 style={{ color: '#dbc084', fontSize: '22px', marginBottom: '15px' }}>
-                Question {currentQuestion + 1} of {totalQuestions}
-              </h2>
-              <p style={{ marginBottom: '20px', fontSize: '17px' }}>{question.question}</p>
-
-              {question.type === 'character' && (
-                <img
-                  src={question.image}
-                  alt="Question character"
-                  style={{
-                    width: '150px',
-                    height: '150px',
-                    objectFit: 'contain',
-                    marginBottom: '15px'
-                  }}
-                />
-              )}
-
-              <div
-                className="options-container"
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: '1fr 1fr',
-                  gap: '12px',
-                  marginBottom: '25px'
-                }}
-              >
-                {question.options.map((option, index) => (
-                  <button
-                    key={index}
-                    onClick={() => onSelectAnswer(index)}
-                    style={{
-                      background:
-                        selectedAnswer === index
-                          ? 'linear-gradient(135deg, #dbc084, #f4d799)'
-                          : 'rgba(255, 255, 255, 0.1)',
-                      border:
-                        selectedAnswer === index
-                          ? '2px solid #dbc084'
-                          : '2px solid rgba(219,192,132,0.3)',
-                      color: selectedAnswer === index ? '#2c2c2c' : '#dbc084',
-                      padding: '10px 15px',
-                      borderRadius: '8px',
-                      fontWeight: '600',
-                      cursor: 'pointer',
-                      transition: 'all 0.3s ease'
-                    }}
-                  >
-                    {option}
-                  </button>
-                ))}
-              </div>
-
-              <button
-                onClick={onNextQuestion}
-                disabled={selectedAnswer === null}
-                style={{
-                  background: selectedAnswer !== null
-                    ? 'linear-gradient(135deg, #dbc084, #f4d799)'
-                    : 'rgba(255, 255, 255, 0.1)',
-                  border: 'none',
-                  color: selectedAnswer !== null ? '#2c2c2c' : '#888',
-                  padding: '12px 30px',
-                  borderRadius: '10px',
-                  fontWeight: '700',
-                  cursor: selectedAnswer !== null ? 'pointer' : 'not-allowed',
-                  transition: 'all 0.3s ease',
-                  boxShadow:
-                    selectedAnswer !== null
-                      ? '0 6px 20px rgba(219, 192, 132, 0.5)'
-                      : 'none'
-                }}
-              >
-                {currentQuestion === totalQuestions - 1 ? 'Show Results' : 'Next'}
-              </button>
-            </>
-          ) : (
-            <>
-              <h2 style={{ color: '#dbc084', marginBottom: '15px' }}>Your Results</h2>
-              <p style={{ fontSize: '18px', marginBottom: '10px' }}>
-                You scored <strong>{score}</strong> out of <strong>{totalQuestions}</strong>
-              </p>
-              <p style={{ fontSize: '16px', opacity: 0.9, marginBottom: '30px' }}>
-                {score >= totalQuestions * 0.7
-                  ? 'Excellent! You really know your Baybayin!'
-                  : 'Keep practicing! You’re doing great learning Baybayin.'}
-              </p>
-
-              <div style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
-                <button
-                  onClick={onRestartTest}
-                  style={{
-                    background: 'linear-gradient(135deg, #dbc084, #f4d799)',
-                    border: 'none',
-                    color: '#2c2c2c',
-                    padding: '10px 25px',
-                    borderRadius: '8px',
-                    cursor: 'pointer',
-                    fontWeight: '700',
-                    transition: 'all 0.3s ease'
-                  }}
-                >
-                  Retake Test
-                </button>
-                <button
-                  onClick={onClose}
-                  style={{
-                    background: 'rgba(255,255,255,0.1)',
-                    border: '2px solid rgba(219,192,132,0.5)',
-                    color: '#dbc084',
-                    padding: '10px 25px',
-                    borderRadius: '8px',
-                    cursor: 'pointer',
-                    fontWeight: '700',
-                    transition: 'all 0.3s ease'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'rgba(219,192,132,0.2)';
-                    e.currentTarget.style.borderColor = '#dbc084';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'rgba(255,255,255,0.1)';
-                    e.currentTarget.style.borderColor = 'rgba(219,192,132,0.5)';
-                  }}
-                >
-                  Close
-                </button>
-              </div>
-            </>
-          )}
-        </div>
-      </div>
-    );
-  };
+  
 
   export default AboutPage;
