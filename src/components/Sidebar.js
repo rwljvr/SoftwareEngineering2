@@ -113,12 +113,10 @@ export default function Sidebar({ onToggle }) {
 
           {/* 📘 Facebook */}
           <a
-            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-              "https://filipinomuna.vercel.app"
-            )}`}
+            href="https://www.facebook.com/profile.php?id=61582079500091"
             target="_blank"
             rel="noopener noreferrer"
-            title="Share on Facebook"
+            title="Visit our Facebook page"
           >
             <Facebook size={18} />
           </a>
