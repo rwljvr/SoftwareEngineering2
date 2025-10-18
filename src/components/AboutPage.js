@@ -862,20 +862,22 @@ closeTest = () => {
           )}
 
           {/* Practice Test Modal */}
-          {this.state.showTest && (
-            <PracticeTestModal
-              currentQuestion={this.state.currentQuestion}
-              selectedAnswer={this.state.selectedAnswer}
-              userAnswers={this.state.userAnswers}
-              showResults={this.state.showResults}
-              score={this.state.score}
-              onSelectAnswer={this.selectAnswer}
-              onNextQuestion={this.nextQuestion}
-              onRestartTest={this.restartTest}
-              onClose={this.closeTest}
-              quizSet={this.state.quizSet}
-            />
-          )}
+{this.state.showTest && (
+  <PracticeTestModal
+    currentQuestion={this.state.currentQuestion}
+    selectedAnswer={this.state.selectedAnswer}
+    userAnswers={this.state.userAnswers}
+    showResults={this.state.showResults}
+    score={this.state.score}
+    onSelectAnswer={this.selectAnswer}
+    onNextQuestion={this.nextQuestion}
+    onRestartTest={this.restartTest}
+    onClose={this.closeTest}
+    quizSet={this.state.quizSet}
+    playerName={this.state.playerName}
+    leaderboard={this.state.leaderboard}
+  />
+)}
           {this.state.showNameEntry && (
   <NameEntryModal
     onSubmit={this.handleNameSubmit}
